@@ -25,7 +25,7 @@
                 </div>
                 <div>
                     <h3 class="text-lg font-semibold text-white mb-1">Email</h3>
-                    <p class="text-indigo-400">admin@amikomevenhub.ac.id</p>
+                    <p class="text-indigo-400">rafiaqil18@students.amikom.ac.id</p>
                     <p class="text-sm text-slate-500 mt-1">Respons dalam 1x24 jam</p>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 </div>
                 <div>
                     <h3 class="text-lg font-semibold text-white mb-1">Telepon</h3>
-                    <p class="text-emerald-400">(0274) 123-4567</p>
+                    <p class="text-emerald-400">0831-0781-9553</p>
                     <p class="text-sm text-slate-500 mt-1">Senin - Jumat, 08:00 - 16:00 WIB</p>
                 </div>
             </div>

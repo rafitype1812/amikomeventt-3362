@@ -25,7 +25,7 @@
         <div class="flex justify-center -mt-16 relative z-10">
             <div class="w-32 h-32 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 p-1 shadow-xl shadow-indigo-500/30">
                 <div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center">
-                    <span class="text-4xl font-bold text-indigo-400">3362</span>
+                    <span class="text-4xl font-bold text-indigo-400">? PROFIL ?</span>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left mt-8">
                 <div class="bg-slate-700/30 rounded-xl p-5 border border-slate-600/30">
                     <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Nama Lengkap</p>
-                    <p class="text-white font-medium">Praktikan 3362</p>
+                    <p class="text-white font-medium">MUHAMAD RAFI AQIL FARRUK</p>
                 </div>
                 <div class="bg-slate-700/30 rounded-xl p-5 border border-slate-600/30">
                     <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">NIM</p>
