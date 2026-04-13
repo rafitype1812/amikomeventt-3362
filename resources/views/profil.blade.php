@@ -25,7 +25,7 @@
         <div class="flex justify-center -mt-16 relative z-10">
             <div class="w-32 h-32 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 p-1 shadow-xl shadow-indigo-500/30">
                 <div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center">
-                    <span class="text-4xl font-bold text-indigo-400">? PROFIL ?</span>
+                    <span class="text-4xl font-bold text-indigo-400"> PROFIL </span>
                 </div>
             </div>
         </div>
