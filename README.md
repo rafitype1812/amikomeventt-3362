@@ -4,7 +4,7 @@ Nama : Praktikan NIM 3362 Nim : 24.12.3362 Kelas : 24SI05
 
 Link cloud : https://eventamikomm-3362-main-3362.free.laravel.cloud/
 
-Link profil : https://eventamikomm-3362-main-3362.free.laravel.cloud/profil
+Link profil : https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/profil
 
 Link katalog : https://eventamikomm-3362-main-3362.free.laravel.cloud/katalog
 
