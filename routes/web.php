@@ -1,23 +1,44 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\Admin\CategoryController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// ─────────────────────────────────────────────
+//  Rute User Area
+// ─────────────────────────────────────────────
 
-Route::get('/profil', function () {
-    return view('profil');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/katalog', function () {
-    return view('katalog');
-});
+Route::get('/event/1', [EventController::class, 'show'])->name('events.show');
 
-Route::get('/bantuan', function () {
-    return view('bantuan');
-});
+Route::get('/checkout', [EventController::class, 'checkout'])->name('checkout');
 
-Route::get('/kontak', function () {
-    return view('kontak');
+Route::get('/my-ticket', [EventController::class, 'ticket'])->name('ticket');
+
+// Rute lama (pertemuan sebelumnya – tetap dipertahankan)
+Route::get('/profil', function () { return view('profil'); });
+Route::get('/katalog', function () { return view('katalog'); });
+Route::get('/bantuan', function () { return view('bantuan'); });
+Route::get('/kontak', function () { return view('kontak'); });
+
+// ─────────────────────────────────────────────
+//  Rute Admin Area
+// ─────────────────────────────────────────────
+
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/events', [AdminEventController::class, 'indexAdmin'])->name('events.index');
+
+    Route::get('/transactions', function () {
+        return view('admin.transactions');
+    })->name('transactions.index');
+
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+
 });
