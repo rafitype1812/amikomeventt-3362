@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\Admin\EventController as EventAdminController;
 use App\Http\Controllers\Admin\CategoryController;
 
 // ─────────────────────────────────────────────
@@ -33,7 +33,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/events', [AdminEventController::class, 'indexAdmin'])->name('events.index');
+    Route::resource('events', EventAdminController::class);
 
     Route::get('/transactions', function () {
         return view('admin.transactions');

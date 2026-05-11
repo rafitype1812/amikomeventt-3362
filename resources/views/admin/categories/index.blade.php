@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('title', 'Manajemen Kategori')
-@section('page-title', 'Manajemen Kategori')
-@section('page-subtitle', 'Kelola kategori event yang tersedia')
+@section('page_title', 'Manajemen Kategori')
+@section('page_subtitle', 'Kelola kategori event yang tersedia')
 
 @section('content')
 

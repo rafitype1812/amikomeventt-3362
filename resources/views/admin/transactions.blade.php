@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('title', 'Manajemen Transaksi')
-@section('page-title', 'Manajemen Transaksi')
-@section('page-subtitle', 'Riwayat dan status seluruh transaksi tiket')
+@section('page_title', 'Manajemen Transaksi')
+@section('page_subtitle', 'Riwayat dan status seluruh transaksi tiket')
 
 @section('content')
 
