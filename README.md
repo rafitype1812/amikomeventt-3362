@@ -35,3 +35,8 @@ Tugas 3
 
 Menambahkan database migration seeding
 
+
+# Tugas 4
+Tugas 4
+
+https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/admin
