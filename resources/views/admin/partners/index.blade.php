@@ -1,49 +1,46 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Kategori')
-@section('page_title', 'Manajemen Kategori')
-@section('page_subtitle', 'Kelola kategori event yang tersedia')
+@section('title', 'Manajemen Partner')
+@section('page_title', 'Manajemen Partner')
+@section('page_subtitle', 'Kelola partner sponsor dan pendukung event')
 
 @section('content')
 
 {{-- Header Actions --}}
 <div class="flex items-center justify-between mb-6">
     <div class="relative">
-        <form action="{{ route('admin.categories.index') }}" method="GET">
+        <form action="{{ route('admin.partners.index') }}" method="GET">
             <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
-            <input type="text" name="search" id="search-category" placeholder="Cari kategori..."
+            <input type="text" name="search" id="search-partner" placeholder="Cari partner..."
                    value="{{ $search }}"
                    class="pl-9 pr-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-sm
                           placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-60 transition-all">
         </form>
     </div>
-    <button id="btn-tambah-kategori"
-            onclick="document.getElementById('modal-tambah').classList.remove('hidden')"
+    <button id="btn-tambah-partner"
+            onclick="document.getElementById('modal-tambah-partner').classList.remove('hidden')"
             class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600
                    text-white text-sm font-semibold rounded-xl shadow-lg shadow-indigo-500/30
                    hover:shadow-indigo-500/50 hover:scale-105 transition-all">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
         </svg>
-        Tambah Kategori
+        Tambah Partner
     </button>
 </div>
 
 {{-- Summary Cards --}}
 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
     @php
-        $totalCategories = $categories->count();
-        $totalEvents = $categories->sum('events_count');
-        $popularCategory = $categories->sortByDesc('events_count')->first();
-        $popularName = $popularCategory && $popularCategory->events_count > 0 ? $popularCategory->name : '-';
+        $totalPartners = $partners->count();
     @endphp
     @foreach([
-        ['Total Kategori', $totalCategories,  'bg-indigo-500/10', 'text-indigo-300'],
-        ['Aktif',          $totalCategories,  'bg-green-400/10',  'text-green-400'],
-        ['Total Event',    $totalEvents, 'bg-amber-400/10',  'text-amber-400'],
-        ['Paling Populer', $popularName, 'bg-purple-400/10', 'text-purple-300'],
+        ['Total Partner', $totalPartners,  'bg-indigo-500/10', 'text-indigo-300'],
+        ['Aktif',          $totalPartners,  'bg-green-400/10',  'text-green-400'],
+        ['Tipe Kolaborasi','Sponsorship', 'bg-amber-400/10',  'text-amber-400'],
+        ['Tingkat Kepuasan', '98%', 'bg-purple-400/10', 'text-purple-300'],
     ] as $s)
     <div class="bg-slate-800/50 border border-slate-700/50 rounded-xl px-4 py-3">
         <p class="text-slate-400 text-xs mb-1">{{ $s[0] }}</p>
@@ -52,67 +49,50 @@
     @endforeach
 </div>
 
-{{-- Categories Table --}}
+{{-- Partners Table --}}
 <div class="bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden">
     <table class="w-full text-sm">
         <thead class="bg-slate-700/40 border-b border-slate-700">
             <tr>
                 <th class="text-left px-5 py-3.5 text-slate-400 font-semibold text-xs uppercase tracking-wider w-12">#</th>
-                <th class="text-left px-5 py-3.5 text-slate-400 font-semibold text-xs uppercase tracking-wider">Nama Kategori</th>
-                <th class="text-left px-5 py-3.5 text-slate-400 font-semibold text-xs uppercase tracking-wider">Slug</th>
-                <th class="text-left px-5 py-3.5 text-slate-400 font-semibold text-xs uppercase tracking-wider">Jumlah Event</th>
-                <th class="text-left px-5 py-3.5 text-slate-400 font-semibold text-xs uppercase tracking-wider">Warna Badge</th>
+                <th class="text-left px-5 py-3.5 text-slate-400 font-semibold text-xs uppercase tracking-wider">Logo</th>
+                <th class="text-left px-5 py-3.5 text-slate-400 font-semibold text-xs uppercase tracking-wider">Nama Partner</th>
+                <th class="text-left px-5 py-3.5 text-slate-400 font-semibold text-xs uppercase tracking-wider">URL Logo</th>
+                <th class="text-left px-5 py-3.5 text-slate-400 font-semibold text-xs uppercase tracking-wider">Terdaftar Pada</th>
                 <th class="text-center px-5 py-3.5 text-slate-400 font-semibold text-xs uppercase tracking-wider">Aksi</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-slate-700/50">
-            @forelse($categories as $cat)
+            @forelse($partners as $partner)
             <tr class="hover:bg-slate-700/20 transition-colors group">
-                <td class="px-5 py-4 text-slate-500 text-xs font-mono">{{ $cat->id }}</td>
+                <td class="px-5 py-4 text-slate-500 text-xs font-mono">{{ $partner->id }}</td>
                 <td class="px-5 py-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500/30 to-purple-500/30
-                                    flex items-center justify-center text-lg">
-                            @php
-                            $icons = [
-                                'Seminar IT' => '🎙️',
-                                'Entertainment' => '🎵',
-                                'E-Sport' => '🏆',
-                                'Workshop Design' => '🔧',
-                            ];
-                            @endphp
-                            {{ $icons[$cat->name] ?? '📌' }}
-                        </div>
-                        <span class="text-white font-semibold">{{ $cat->name }}</span>
+                    <div class="w-10 h-10 rounded-lg bg-slate-700/50 flex items-center justify-center overflow-hidden border border-slate-600/50 p-1">
+                        @if($partner->logo_url)
+                            <img src="{{ $partner->logo_url }}" alt="{{ $partner->name }}" class="object-contain w-full h-full">
+                        @else
+                            <span class="text-white text-xs font-bold">{{ substr($partner->name, 0, 2) }}</span>
+                        @endif
                     </div>
                 </td>
                 <td class="px-5 py-4">
-                    <code class="text-slate-400 text-xs bg-slate-700/50 px-2 py-0.5 rounded">{{ $cat->slug }}</code>
+                    <span class="text-white font-semibold">{{ $partner->name }}</span>
                 </td>
                 <td class="px-5 py-4">
-                    <span class="text-white font-semibold">{{ $cat->events_count }}</span>
-                    <span class="text-slate-500 text-xs ml-1">event</span>
+                    @if($partner->logo_url)
+                        <code class="text-slate-400 text-xs bg-slate-700/50 px-2 py-0.5 rounded truncate max-w-xs block" title="{{ $partner->logo_url }}">{{ $partner->logo_url }}</code>
+                    @else
+                        <span class="text-slate-500 italic text-xs">-</span>
+                    @endif
                 </td>
-                <td class="px-5 py-4">
-                    @php
-                    $colors = [
-                        'Seminar IT' => 'bg-blue-500/10 text-blue-300 ring-blue-500/20',
-                        'Entertainment' => 'bg-pink-500/10 text-pink-300 ring-pink-500/20',
-                        'E-Sport' => 'bg-amber-500/10 text-amber-300 ring-amber-500/20',
-                        'Workshop Design' => 'bg-purple-500/10 text-purple-300 ring-purple-500/20',
-                    ];
-                    $colorClass = $colors[$cat->name] ?? 'bg-teal-500/10 text-teal-300 ring-teal-500/20';
-                    $colorName = isset($colors[$cat->name]) ? explode(' ', explode('-', $colors[$cat->name])[1])[0] : 'Teal';
-                    @endphp
-                    <span class="px-2.5 py-1 rounded-full text-xs font-semibold ring-1 {{ $colorClass }}">
-                        {{ ucfirst($colorName) }}
-                    </span>
+                <td class="px-5 py-4 text-slate-400 text-xs">
+                    {{ $partner->created_at->format('d M Y H:i') }}
                 </td>
                 <td class="px-5 py-4">
                     <div class="flex items-center justify-center gap-2">
                         {{-- Tombol Edit --}}
-                        <button id="btn-edit-{{ $cat->id }}" title="Edit Kategori"
-                                onclick="openEditModal({{ $cat->id }}, '{{ addslashes($cat->name) }}', '{{ addslashes($cat->slug) }}')"
+                        <button id="btn-edit-partner-{{ $partner->id }}" title="Edit Partner"
+                                onclick="openEditPartnerModal({{ $partner->id }}, '{{ addslashes($partner->name) }}', '{{ addslashes($partner->logo_url) }}')"
                                 class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-500/10 text-indigo-400
                                        hover:bg-indigo-500/20 text-xs font-medium transition-all">
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,10 +102,10 @@
                             Edit
                         </button>
                         {{-- Tombol Hapus --}}
-                        <form action="{{ route('admin.categories.destroy', $cat->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kategori ini?')">
+                        <form action="{{ route('admin.partners.destroy', $partner->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus partner ini?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" id="btn-hapus-{{ $cat->id }}" title="Hapus Kategori"
+                            <button type="submit" id="btn-hapus-partner-{{ $partner->id }}" title="Hapus Partner"
                                     class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-500/10 text-red-400
                                            hover:bg-red-500/20 text-xs font-medium transition-all">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -141,7 +121,7 @@
             @empty
             <tr>
                 <td colspan="6" class="px-5 py-8 text-center text-slate-500">
-                    Tidak ada kategori ditemukan.
+                    Tidak ada partner ditemukan.
                 </td>
             </tr>
             @endforelse
@@ -149,88 +129,88 @@
     </table>
 
     <div class="px-5 py-4 border-t border-slate-700/50 flex items-center justify-between">
-        <p class="text-slate-400 text-xs">Menampilkan {{ $categories->count() }} kategori</p>
+        <p class="text-slate-400 text-xs">Menampilkan {{ $partners->count() }} partner</p>
     </div>
 </div>
 
-{{-- ===== MODAL TAMBAH KATEGORI ===== --}}
-<div id="modal-tambah"
+{{-- ===== MODAL TAMBAH PARTNER ===== --}}
+<div id="modal-tambah-partner"
      class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
     <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 w-full max-w-md shadow-2xl">
         <div class="flex items-center justify-between mb-5">
-            <h3 class="text-white font-bold text-lg">Tambah Kategori Baru</h3>
-            <button onclick="document.getElementById('modal-tambah').classList.add('hidden')"
+            <h3 class="text-white font-bold text-lg">Tambah Partner Baru</h3>
+            <button onclick="document.getElementById('modal-tambah-partner').classList.add('hidden')"
                     class="w-8 h-8 rounded-lg bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-all">
                 ✕
             </button>
         </div>
 
-        <form action="{{ route('admin.categories.store') }}" method="POST" class="space-y-4">
+        <form action="{{ route('admin.partners.store') }}" method="POST" class="space-y-4">
             @csrf
             <div>
-                <label for="nama_kategori" class="block text-sm font-medium text-slate-300 mb-1.5">Nama Kategori *</label>
-                <input type="text" id="nama_kategori" name="nama_kategori" required placeholder="Contoh: Seminar"
+                <label for="name" class="block text-sm font-medium text-slate-300 mb-1.5">Nama Partner *</label>
+                <input type="text" id="name" name="name" required placeholder="Contoh: PT. Sumber Jaya"
                        class="w-full px-4 py-2.5 rounded-xl bg-slate-700/50 border border-slate-600 text-white
                               placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
             </div>
             <div>
-                <label for="slug_kategori" class="block text-sm font-medium text-slate-300 mb-1.5">Slug</label>
-                <input type="text" id="slug_kategori" name="slug" placeholder="seminar (auto-generate)"
+                <label for="logo_url" class="block text-sm font-medium text-slate-300 mb-1.5">URL Logo Partner</label>
+                <input type="url" id="logo_url" name="logo_url" placeholder="https://example.com/logo.png"
                        class="w-full px-4 py-2.5 rounded-xl bg-slate-700/50 border border-slate-600 text-white
                               placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
             </div>
 
             <div class="flex gap-3 pt-2">
                 <button type="button"
-                        onclick="document.getElementById('modal-tambah').classList.add('hidden')"
+                        onclick="document.getElementById('modal-tambah-partner').classList.add('hidden')"
                         class="flex-1 px-4 py-2.5 rounded-xl bg-slate-700 text-slate-300 hover:bg-slate-600 text-sm font-medium transition-all">
                     Batal
                 </button>
-                <button type="submit" id="btn-simpan-kategori"
+                <button type="submit" id="btn-simpan-partner"
                         class="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600
                                text-white text-sm font-semibold hover:scale-105 shadow-lg shadow-indigo-500/30 transition-all">
-                    Simpan Kategori
+                    Simpan Partner
                 </button>
             </div>
         </form>
     </div>
 </div>
 
-{{-- ===== MODAL EDIT KATEGORI ===== --}}
-<div id="modal-edit"
+{{-- ===== MODAL EDIT PARTNER ===== --}}
+<div id="modal-edit-partner"
      class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
     <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 w-full max-w-md shadow-2xl">
         <div class="flex items-center justify-between mb-5">
-            <h3 class="text-white font-bold text-lg">Edit Kategori</h3>
-            <button onclick="document.getElementById('modal-edit').classList.add('hidden')"
+            <h3 class="text-white font-bold text-lg">Edit Partner</h3>
+            <button onclick="document.getElementById('modal-edit-partner').classList.add('hidden')"
                     class="w-8 h-8 rounded-lg bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-all">
                 ✕
             </button>
         </div>
 
-        <form id="form-edit" method="POST" class="space-y-4">
+        <form id="form-edit-partner" method="POST" class="space-y-4">
             @csrf
             @method('PUT')
             <div>
-                <label for="edit_name" class="block text-sm font-medium text-slate-300 mb-1.5">Nama Kategori *</label>
-                <input type="text" id="edit_name" name="name" required placeholder="Contoh: Seminar"
+                <label for="edit_partner_name" class="block text-sm font-medium text-slate-300 mb-1.5">Nama Partner *</label>
+                <input type="text" id="edit_partner_name" name="name" required placeholder="Contoh: PT. Sumber Jaya"
                        class="w-full px-4 py-2.5 rounded-xl bg-slate-700/50 border border-slate-600 text-white
                               placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
             </div>
             <div>
-                <label for="edit_slug" class="block text-sm font-medium text-slate-300 mb-1.5">Slug</label>
-                <input type="text" id="edit_slug" name="slug" placeholder="seminar"
+                <label for="edit_partner_logo" class="block text-sm font-medium text-slate-300 mb-1.5">URL Logo Partner</label>
+                <input type="url" id="edit_partner_logo" name="logo_url" placeholder="https://example.com/logo.png"
                        class="w-full px-4 py-2.5 rounded-xl bg-slate-700/50 border border-slate-600 text-white
                               placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
             </div>
 
             <div class="flex gap-3 pt-2">
                 <button type="button"
-                        onclick="document.getElementById('modal-edit').classList.add('hidden')"
+                        onclick="document.getElementById('modal-edit-partner').classList.add('hidden')"
                         class="flex-1 px-4 py-2.5 rounded-xl bg-slate-700 text-slate-300 hover:bg-slate-600 text-sm font-medium transition-all">
                     Batal
                 </button>
-                <button type="submit" id="btn-update-kategori"
+                <button type="submit" id="btn-update-partner"
                         class="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600
                                text-white text-sm font-semibold hover:scale-105 shadow-lg shadow-indigo-500/30 transition-all">
                     Simpan Perubahan
@@ -241,12 +221,12 @@
 </div>
 
 <script>
-function openEditModal(id, name, slug) {
-    const form = document.getElementById('form-edit');
-    form.action = `/admin/categories/${id}`;
-    document.getElementById('edit_name').value = name;
-    document.getElementById('edit_slug').value = slug;
-    document.getElementById('modal-edit').classList.remove('hidden');
+function openEditPartnerModal(id, name, logoUrl) {
+    const form = document.getElementById('form-edit-partner');
+    form.action = `/admin/partners/${id}`;
+    document.getElementById('edit_partner_name').value = name;
+    document.getElementById('edit_partner_logo').value = logoUrl;
+    document.getElementById('modal-edit-partner').classList.remove('hidden');
 }
 </script>
 

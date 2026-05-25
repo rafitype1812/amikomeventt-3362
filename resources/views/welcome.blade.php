@@ -67,6 +67,34 @@
     @endforeach
 </div>
 
+{{-- ===== CATEGORY GRID ===== --}}
+<div class="mb-14">
+    <h2 class="text-2xl font-bold text-white mb-6">🏷️ Kategori Event</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        @forelse($categories as $cat)
+        <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/50 border border-slate-700/50 hover:border-indigo-500/40 hover:bg-slate-800 transition-all duration-300">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-2xl shadow-lg shrink-0">
+                @php
+                $icons = [
+                    'Seminar IT' => '🎙️',
+                    'Entertainment' => '🎵',
+                    'E-Sport' => '🏆',
+                    'Workshop Design' => '🔧',
+                ];
+                @endphp
+                {{ $icons[$cat->name] ?? '📌' }}
+            </div>
+            <div>
+                <p class="text-white font-semibold text-sm">{{ $cat->name }}</p>
+                <p class="text-slate-400 text-xs mt-0.5">{{ $cat->events_count }} Event</p>
+            </div>
+        </div>
+        @empty
+        <div class="col-span-full text-center text-slate-500 py-4">Belum ada kategori yang tersedia.</div>
+        @endforelse
+    </div>
+</div>
+
 {{-- ===== EVENT GRID ===== --}}
 <div id="event-grid">
     <div class="flex items-center justify-between mb-6">
@@ -246,6 +274,27 @@
             </div>
         </a>
         @endforeach
+    </div>
+</div>
+
+{{-- ===== PARTNERS SECTION ===== --}}
+<div class="mt-16 bg-slate-800/30 border border-slate-700/50 rounded-2xl p-8">
+    <h2 class="text-center text-xl font-bold text-white mb-8">🤝 Partner Pendukung</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-6 items-center justify-center">
+        @forelse($partners as $partner)
+        <div class="flex flex-col items-center justify-center p-4 bg-slate-800/40 border border-slate-700/50 rounded-xl hover:scale-105 transition-all duration-300">
+            <div class="w-16 h-16 rounded-lg bg-slate-700/30 flex items-center justify-center overflow-hidden mb-2 border border-slate-600/30 p-1">
+                @if($partner->logo_url)
+                    <img src="{{ $partner->logo_url }}" alt="{{ $partner->name }}" class="object-contain w-full h-full">
+                @else
+                    <span class="text-white font-bold text-sm">{{ substr($partner->name, 0, 2) }}</span>
+                @endif
+            </div>
+            <p class="text-slate-300 text-xs font-semibold text-center truncate w-full">{{ $partner->name }}</p>
+        </div>
+        @empty
+        <div class="col-span-full text-center text-slate-500">Belum ada partner pendukung.</div>
+        @endforelse
     </div>
 </div>
 

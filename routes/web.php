@@ -39,6 +39,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return view('admin.transactions');
     })->name('transactions.index');
 
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::resource('categories', CategoryController::class);
+    Route::resource('partners', \App\Http\Controllers\Admin\PartnerController::class);
 
 });
