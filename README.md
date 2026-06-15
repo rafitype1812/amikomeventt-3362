@@ -33,10 +33,16 @@ Tugas 2
 # Tugas 3
 Tugas 3
 
-Menambahkan database migration seeding
+Menambahkan database migration seding
 
 
 # Tugas 4
 Tugas 4
 
 https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/admin
+
+
+# Tugas 8
+Tugas 8
+
+https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/admin/login
