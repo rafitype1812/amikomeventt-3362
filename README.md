@@ -46,3 +46,8 @@ https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/admin
 Tugas 8
 
 https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/admin/login
+
+# Tugas 10
+Tugas 10
+
+https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/admin/transaction
