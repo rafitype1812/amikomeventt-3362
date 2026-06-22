@@ -48,7 +48,7 @@
 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14">
     @foreach([
         ['/event/1',      '🎯', 'Detail Event',   'Lihat info lengkap event',    'from-blue-600 to-cyan-500'],
-        ['/checkout',     '🛒', 'Checkout',        'Proses pembelian tiket',      'from-indigo-600 to-violet-500'],
+        ['/checkout/1',   '🛒', 'Checkout',        'Proses pembelian tiket',      'from-indigo-600 to-violet-500'],
         ['/my-ticket',    '🎫', 'E-Tiket Saya',   'Lihat tiket yang dimiliki',   'from-purple-600 to-pink-500'],
         ['/admin',        '⚙️', 'Admin Panel',    'Kelola event &amp; transaksi', 'from-amber-500 to-orange-500'],
     ] as $nav)
@@ -254,8 +254,8 @@
     <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
         @foreach([
             ['1', '🔍', 'Pilih Event',      'Jelajahi event yang tersedia',   '/event/1'],
-            ['2', '🛒', 'Beli Tiket',       'Isi data &amp; pilih pembayaran','/checkout'],
-            ['3', '💳', 'Bayar',            'Konfirmasi pembayaran online',   '/checkout'],
+            ['2', '🛒', 'Beli Tiket',       'Isi data &amp; pilih pembayaran','/checkout/1'],
+            ['3', '💳', 'Bayar',            'Konfirmasi pembayaran online',   '/checkout/1'],
             ['4', '🎫', 'Dapatkan E-Tiket', 'Tiket digital siap digunakan',  '/my-ticket'],
         ] as $step)
         <a href="{{ $step[4] }}" class="group flex flex-col items-center text-center gap-3 p-4 rounded-xl hover:bg-slate-800/50 transition-all">

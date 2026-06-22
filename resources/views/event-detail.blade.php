@@ -121,7 +121,7 @@
                 </div>
             </div>
 
-            <a href="/checkout"
+            <a href="{{ route('checkout.create', 1) }}"
                class="block w-full text-center px-6 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-105 transition-all duration-300">
                 Beli Tiket Sekarang
             </a>
