@@ -57,6 +57,6 @@ Tugas 11
 
 hamalan menu pemesanan : https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/checkout/3
 
-halaman pembayaran midtrans : https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/payment/TRX-1782582117-EOXoW
+halaman pembayaran midtrans : https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/payment/TRX-1783868968-ewbfC
 
 laporan transaksi : https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/admin/transactions
