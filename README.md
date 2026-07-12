@@ -51,3 +51,12 @@ https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/admin/login
 Tugas 10
 
 https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/admin/transactions
+
+# Tugas 11
+Tugas 11
+
+hamalan menu pemesanan : https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/checkout/3
+
+halaman pembayaran midtrans : https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/payment/TRX-1782582117-EOXoW
+
+laporan transaksi : https://amikomeventt-3362-main-cn3kqp.free.laravel.cloud/admin/transactions
